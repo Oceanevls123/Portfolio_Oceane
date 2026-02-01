@@ -1,0 +1,421 @@
+:root {
+    --text-light: rgb(250, 255, 252); 
+    --pink: rgb(255, 255, 255);
+}
+
+/* ===== GLOBAL ===== */
+* { 
+    margin: 0; 
+    padding: 0;  
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    outline: none; 
+    border: none;
+    text-decoration: none;
+    transition: 0.2s linear;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    overflow-x: hidden;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: rgb(57, 12, 32);
+    color: rgb(255, 255, 255);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/* ===== SECTIONS ===== */
+section, main {
+    padding: 12rem 9%; /* espace sous le header fixe */
+}
+
+/* ===== HEADER ===== */
+
+header {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 3.5rem 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2000;
+    background-color: transparent; /* pas de fond au départ */
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+header:hover {
+    background-color: rgba(57,12,32,0.3); /* fond léger */
+    backdrop-filter: blur(10px); /* flou appliqué */
+}
+
+header.scrolled {
+    background: rgba(57, 12, 32, 0.85); /* plus opaque au scroll */
+}
+
+header .logo {
+    font-size: 3.2rem;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    text-transform: lowercase;
+    z-index: 2100;
+    transition: transform 0.3s ease;
+}
+
+header .logo:hover {
+    transform: scale(1.1);
+}
+
+header .logo span {
+    color: var(--pink);
+}
+
+header .navbar {
+    display: flex;
+    flex-direction: row;
+    gap: 2.5rem;
+}
+
+header .navbar a {
+    font-size: 1.6rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: rgb(255, 255, 255);
+    padding: 0 2.5rem;
+    position: relative;
+}
+
+header .navbar a::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background: var(--pink);
+    transition: 0.3s ease;
+    transform: translateX(-50%);
+}
+
+header .navbar a:hover::after {
+    width: 100%;
+}
+
+header .icons {
+    display: flex;
+    gap: 1.5rem;
+    margin-left: auto;
+    z-index: 2100;
+}
+
+header .icons a {
+    font-size: 2.5rem;
+    color: rgb(103, 139, 32);
+}
+
+header .icons a:hover {
+    color: var(--pink);
+}
+
+/* ===== BURGER ===== */
+.burger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 6px;
+    z-index: 2100;
+}
+
+.burger span {
+    width: 28px;
+    height: 3px;
+    display: block;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animation burger */
+.burger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.burger.active span:nth-child(2) {
+    opacity: 0;
+}
+.burger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ===== HOME ===== */
+.home {
+    background: url('../photo.png') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    min-height: 100vh;
+}
+
+.home-intro {
+    position: absolute;
+    bottom: 12%;
+    left: 6%;
+    color: white;
+    max-width: 40rem;
+}
+
+.home-intro h1 {
+    font-size: 4.2rem;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    margin-bottom: 1.2rem;
+}
+
+.home-intro p {
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    opacity: 0.8;
+}
+
+/* ===== ABOUT ===== */
+.about h1 {
+    font-size: 3.6rem;
+    color: white;
+    font-weight: 300;
+    margin-bottom: 4rem;
+}
+.about p {
+    font-size: 1.6rem;
+    color: white;
+    line-height: 1.9;
+    max-width: 60rem;
+    margin-bottom: 2.5rem;
+}
+
+
+/* ===== WORK ===== */
+
+/* Barre de filtres */
+.work-filters {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+}
+
+.work-filters .filter-btn {
+    position: relative;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.5rem;
+    font-weight: 300;
+    cursor: pointer;
+    padding: 0.6rem 1.2rem 0.6rem 1.6rem; /* espace pour l’étoile */
+}
+
+/* ÉTOILE */
+.work-filters .filter-btn::before {
+    content: "★";
+    position: absolute;
+    top: 50%;
+    left: 0.2rem;
+    transform: translateY(-50%) rotate(-90deg);
+    font-size: 2rem;
+    color: rgba(255, 255, 255,); /* très transparente */
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+    pointer-events: none;
+}
+
+/* Hover */
+.work-filters .filter-btn:hover::before {
+    opacity: 1;
+    transform: translateY(-50%) rotate(0deg);
+}
+
+/* Actif */
+.work-filters .filter-btn.active::before {
+    opacity: 1;
+    transform: translateY(-50%) rotate(0deg);
+}
+
+/* Actif */
+.work-filters .filter-btn.active::after {
+    opacity: 1;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.9);
+}
+
+.work-filters .filter-btn:hover,
+.work-filters .filter-btn.active {
+    color: rgb(173, 95, 160);
+    border-bottom: 2px solid rgb(233, 135, 202);
+}
+
+/* Grille des projets */
+.work-grid {
+    gap: 2.5rem;
+    column-count: 3;
+    column-gap: 2.5rem;
+}
+
+.work-item img {
+    break-inside: avoid;
+    margin-bottom: 2.5rem; 
+    width: 100%;
+    display: block;
+    transition: opacity 0.4s ease, transform 0.3s ease;
+    border-radius: 0.5rem;
+}
+
+.work-item:hover img {
+    opacity: 0.8;
+    transform: scale(1.02);
+}
+
+/* Hidden items */
+.work-item.hidden {
+    display: none !important;
+}
+
+
+/* ===== SHOP ===== */
+.shop {
+    padding-top: 12rem;
+    color: white;
+}
+.shop h1 {
+    font-size: 3.6rem;
+    font-weight: 300;
+    margin-bottom: 4rem;
+}
+.shop p {
+    font-size: 1.6rem;
+    line-height: 1.9;
+    max-width: 60rem;
+    margin-bottom: 2.5rem;
+}
+
+/* ===== CONTACT ===== */
+.contact {
+    padding-top: 12rem;
+    color: white;
+}
+.contact h1 {
+    font-size: 3.6rem;
+    font-weight: 300;
+    margin-bottom: 4rem;
+}
+.contact p,
+.contact form {
+    font-size: 1.6rem;
+    line-height: 1.9;
+    max-width: 60rem;
+    margin-bottom: 2.5rem;
+}
+.contact form input,
+.contact form textarea {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    background: rgba(255,255,255,0.05);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 0.5rem;
+}
+.contact form button {
+    padding: 1rem 2rem;
+    background: var(--pink);
+    color: rgb(57, 12, 32);
+    font-weight: 600;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.contact form button:hover {
+    opacity: 0.85;
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* Desktop */
+@media (max-width: 991px) {
+     .work-grid {
+        column-count: 2;
+    }
+    html {
+        font-size: 55%;
+    }
+    header {
+        padding: 2rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .work-grid {
+        column-count: 1;
+    }
+    html {
+        font-size: 50%;
+    }
+
+    header .navbar {
+        display: none; /* caché par défaut */
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: rgba(57,12,32,0.95);
+        width: 60%;
+        padding: 2rem;
+        gap: 1.5rem;
+        z-index: 2000;
+    }
+
+    header .navbar.active {
+        display: flex;
+        
+    }
+
+    header .navbar a {
+        display: block;
+        color: var(--text-light);
+        padding: 1rem 0;
+        background: rgba(203, 148, 211, 0.2);
+        border-radius: 0.5rem;
+    }
+
+    .burger {
+        display: flex;
+    }
+
+    header .icons {
+        display: none;
+    }
+
+    /* afficher les icônes dans le menu mobile */
+    .icons-mobile {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 2rem;
+        justify-content: flex-start;
+    }
+
+    .icons-mobile a {
+        font-size: 2.5rem;
+        color: var(--text-light);
+    }
+
+    .icons-mobile a:hover {
+        color: var(--pink);
+    }
+}
